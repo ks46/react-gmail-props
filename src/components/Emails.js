@@ -1,4 +1,4 @@
-import '../styles/app.css'
+import '../styles/email.css'
 import Email from './Email'
 
 export default function Emails(props) {
