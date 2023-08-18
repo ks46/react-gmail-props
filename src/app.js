@@ -4,6 +4,7 @@ import initialEmails from './data/emails'
 
 import './styles/app.css'
 import Emails from './components/Emails'
+import EmailView from './components/EmailView'
 
 const getReadEmails = emails => emails.filter(email => !email.read)
 
@@ -13,6 +14,7 @@ function App() {
   const [emails, setEmails] = useState(initialEmails)
   const [hideRead, setHideRead] = useState(false)
   const [currentTab, setCurrentTab] = useState('inbox')
+  const [currentEmailId, setCurrentEmailId] = useState(null)
 
   const unreadEmails = emails.filter(email => !email.read)
   const starredEmails = emails.filter(email => email.starred)
@@ -41,6 +43,12 @@ function App() {
 
   if (currentTab === 'starred')
     filteredEmails = getStarredEmails(filteredEmails)
+
+  /** TODO:
+   * if (currentEmailId)
+   *    set read to true in email object with this currentEmailId id, and 
+   *    update emails array
+   */
 
   return (
     <div className="app">
@@ -89,11 +97,15 @@ function App() {
         </ul>
       </nav>
       <main className="emails">
-        <Emails
-          filteredEmails={filteredEmails}
-          toggleRead={toggleRead}
-          toggleStar={toggleStar}
-        />
+        {
+          currentEmailId ? <EmailView /> :
+            <Emails
+              filteredEmails={filteredEmails}
+              toggleRead={toggleRead}
+              toggleStar={toggleStar}
+              setCurrentEmailId={setCurrentEmailId}
+            />
+        }
       </main>
     </div>
   )

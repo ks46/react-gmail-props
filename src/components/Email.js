@@ -22,8 +22,10 @@ export default function Email(props) {
           onChange={() => props.toggleStar(props.email)}
         />
       </div>
-      <div className="sender">{props.email.sender}</div>
-      <div className="title">{props.email.title}</div>
+      <div className="email-preview" onClick={() => {props.setCurrentEmailId(props.email.id)}}>
+        <div className="sender">{props.email.sender}</div>
+        <div className="title" >{props.email.title}</div>
+      </div>
     </li>
   )
 }
