@@ -1,18 +1,11 @@
-import '../styles/email_view.css'
+import EmailContent from './EmailContent'
+import EmailToolBar from './EmailToolBar'
 
 export default function EmailView(props) {
-  /** TODO: render view for a single email
-   * props to be passed:
-   * email object
-   * setCurrentEmailId
-   * 
-   * when clicking back button:
-   *    setCurrentEmailId(null)
-   *    email.read = true
-   */
   return (
     <main className="email-view">
-      <h2>Rendering a page for a single email</h2>
+      <EmailToolBar toggleEmailView={props.toggleEmailView} />
+      <EmailContent email={props.email} />
     </main>
   )
 }

@@ -37,18 +37,27 @@ function App() {
     setEmails(updatedEmails)
   }
 
+  const toggleEmailView = targetEmail => {
+    if (targetEmail === null) {
+      setCurrentEmailId(null)
+    } else {
+      if (!targetEmail.read) {
+        const updatedEmails = emails =>
+          emails.map(email => 
+            email.id === targetEmail.id ? {...email, read: true} : email
+          )
+        setEmails(updatedEmails)
+      }
+      setCurrentEmailId(targetEmail.id)
+    }
+  }
+
   let filteredEmails = emails
 
   if (hideRead) filteredEmails = getReadEmails(filteredEmails)
 
   if (currentTab === 'starred')
     filteredEmails = getStarredEmails(filteredEmails)
-
-  /** TODO:
-   * if (currentEmailId)
-   *    set read to true in email object with this currentEmailId id, and 
-   *    update emails array
-   */
 
   return (
     <div className="app">
@@ -98,11 +107,16 @@ function App() {
       </nav>
       <main className="emails">
         {
-          currentEmailId ? <EmailView /> :
+          currentEmailId ?
+            <EmailView
+              email={emails.find(email => email.id === currentEmailId)}
+              toggleEmailView={toggleEmailView}
+            /> :
             <Emails
               filteredEmails={filteredEmails}
               toggleRead={toggleRead}
               toggleStar={toggleStar}
+              toggleEmailView={toggleEmailView}
               setCurrentEmailId={setCurrentEmailId}
             />
         }

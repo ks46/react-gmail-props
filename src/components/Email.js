@@ -1,4 +1,5 @@
 import '../styles/app.css'
+import '../styles/email.css'
 
 export default function Email(props) {
   // render an email as a list item
@@ -22,7 +23,7 @@ export default function Email(props) {
           onChange={() => props.toggleStar(props.email)}
         />
       </div>
-      <div className="email-preview" onClick={() => {props.setCurrentEmailId(props.email.id)}}>
+      <div className="email-preview" onClick={() => {props.toggleEmailView(props.email)}}>
         <div className="sender">{props.email.sender}</div>
         <div className="title" >{props.email.title}</div>
       </div>

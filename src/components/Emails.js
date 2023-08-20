@@ -6,7 +6,7 @@ export default function Emails(props) {
   return (
     <ul>
       {props.filteredEmails.map((email, index) => (
-        <Email email={email} index={index} toggleRead={props.toggleRead} toggleStar={props.toggleStar} setCurrentEmailId={props.setCurrentEmailId} key={index} />
+        <Email email={email} index={index} toggleRead={props.toggleRead} toggleStar={props.toggleStar} toggleEmailView={props.toggleEmailView} setCurrentEmailId={props.setCurrentEmailId} key={index} />
       ))}
     </ul>
   )
