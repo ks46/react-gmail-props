@@ -15,6 +15,7 @@ function App() {
   const [hideRead, setHideRead] = useState(false)
   const [currentTab, setCurrentTab] = useState('inbox')
   const [currentEmailId, setCurrentEmailId] = useState(null)
+  // const [searchText, setSearchText] = useState('')
 
   const unreadEmails = emails.filter(email => !email.read)
   const starredEmails = emails.filter(email => email.starred)
@@ -52,6 +53,15 @@ function App() {
     }
   }
 
+  const searchByTitle = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      const searchText = event.target.value
+      const updatedEmails = emails.filter(email => email.title.toLowerCase().includes(searchText.toLowerCase()))
+      setEmails(updatedEmails)
+    }
+  }
+
   let filteredEmails = emails
 
   if (hideRead) filteredEmails = getReadEmails(filteredEmails)
@@ -74,7 +84,12 @@ function App() {
         </div>
 
         <div className="search">
-          <input className="search-bar" placeholder="Search mail" />
+          <input
+            className="search-bar"
+            placeholder="Search mail"
+            // onChange={event => setSearchText(event.target.value)}
+            onKeyDown={searchByTitle}
+          />
         </div>
       </header>
       <nav className="left-menu">
