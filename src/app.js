@@ -53,6 +53,12 @@ function App() {
     }
   }
 
+  const toggleCurrentTab = tab => {
+    setCurrentTab(tab)
+    if (currentEmailId)
+      setCurrentEmailId(null)
+  }
+
   const searchByTitle = event => {
     if (event.key === 'Enter') {
       event.preventDefault()
@@ -96,14 +102,14 @@ function App() {
         <ul className="inbox-list">
           <li
             className={`item ${currentTab === 'inbox' ? 'active' : ''}`}
-            onClick={() => setCurrentTab('inbox')}
+            onClick={() => toggleCurrentTab('inbox')}
           >
             <span className="label">Inbox</span>
             <span className="count">{unreadEmails.length}</span>
           </li>
           <li
             className={`item ${currentTab === 'starred' ? 'active' : ''}`}
-            onClick={() => setCurrentTab('starred')}
+            onClick={() => toggleCurrentTab('starred')}
           >
             <span className="label">Starred</span>
             <span className="count">{starredEmails.length}</span>
